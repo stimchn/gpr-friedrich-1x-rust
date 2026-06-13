@@ -1,0 +1,9 @@
+[package]
+name = "gpr1"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+csv = "1.4.0"
+friedrich = "0.5.0"
+plotters = "0.3.7"
