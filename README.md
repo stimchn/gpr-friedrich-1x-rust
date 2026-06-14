@@ -13,4 +13,4 @@ Rustにてfriedrichクレートを用いてガウス過程回帰（Gaussian Proc
 
 ## 結果のグラフ
 
-![結果グラフ](image.png)
+![結果グラフ](gpr_predict_graph.png)
