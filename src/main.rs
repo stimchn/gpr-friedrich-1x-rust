@@ -45,10 +45,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .map(|((x, y), s)| (x[0], *y, (*s).sqrt()))
         .collect();
 
-    let root = BitMapBackend::new("image.png", (3840, 2160)).into_drawing_area();
+    let root = BitMapBackend::new("gpr_predict_graph.png", (3840, 2160)).into_drawing_area();
     root.fill(&WHITE)?;
     let mut chart = ChartBuilder::on(&root)
-        .caption("GPR Test (friedrich)", ("sans-serif", 128).into_font())
+        .caption("GPR predict (friedrich)", ("sans-serif", 128).into_font())
         .margin(100)
         .x_label_area_size(200)
         .y_label_area_size(200)
@@ -99,10 +99,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
             xy_test.iter().map(|(x, y, s)| (*x, *y + 3.0 * *s)),
             10,
             10,
-            BLACK.stroke_width(4),
+            RED.stroke_width(4),
         ))?
         .label("μ+3σ")
-        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], BLACK.stroke_width(4)));
+        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], RED.stroke_width(4)));
+
     chart
         .draw_series(LineSeries::new(
             xy_test.iter().map(|(x, y, _)| (*x, *y)),
@@ -110,15 +111,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         ))?
         .label("μ")
         .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], BLACK.stroke_width(4)));
+
     chart
         .draw_series(DashedLineSeries::new(
             xy_test.iter().map(|(x, y, s)| (*x, *y - 3.0 * *s)),
             10,
             10,
-            BLACK.stroke_width(4),
+            BLUE.stroke_width(4),
         ))?
         .label("μ-3σ")
-        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 30, y)], BLACK.stroke_width(4)));
+        .legend(|(x, y)| PathElement::new(vec![(x, y), (x + 20, y)], BLUE.stroke_width(4)));
 
     chart
         .configure_series_labels()
